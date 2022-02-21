@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Sprites/tiles/suelos.tres" type="TileSet" id=1]
+[ext_resource path="res://Scenes/Jugador.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Jugador.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Plataforma.tscn" type="PackedScene" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 420, 10 )
+
+[node name="Nivel" type="Node2D"]
+
+[node name="Jugador" parent="." instance=ExtResource( 2 )]
+position = Vector2( 107, -14 )
+collision_layer = 3
+collision_mask = 3
+script = ExtResource( 3 )
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2( 1, -32 )
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 393216, 2, 0, 393217, 2, 1, 393218, 2, 1, 393219, 2, 1, 393220, 2, 1, 393221, 2, 1, 393222, 2, 1, 393223, 2, 1, 393224, 2, 1, 393225, 2, 1, 393226, 2, 1, 393227, 2, 1, 393228, 2, 1, 393229, 2, 2, 458752, 2, 65536, 458753, 2, 65537, 458754, 2, 65537, 458755, 2, 65537, 458756, 2, 65537, 458757, 2, 65537, 458758, 2, 65537, 458759, 2, 65537, 458760, 2, 65537, 458761, 2, 65537, 458762, 2, 65537, 458763, 2, 65537, 458764, 2, 65537, 458765, 2, 65538, 524288, 2, 131072, 524289, 2, 131073, 524290, 2, 131073, 524291, 2, 131073, 524292, 2, 131073, 524293, 2, 131073, 524294, 2, 131073, 524295, 2, 131073, 524296, 2, 131073, 524297, 2, 131073, 524298, 2, 131073, 524299, 2, 131073, 524300, 2, 131073, 524301, 2, 131074 )
+
+[node name="Plataformas" type="Node2D" parent="."]
+
+[node name="Plataforma" parent="Plataformas" instance=ExtResource( 4 )]
+position = Vector2( 18, 32 )
+
+[node name="Plataforma2" parent="Plataformas" instance=ExtResource( 4 )]
+position = Vector2( 143, 32 )
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="Node2D"]
+position = Vector2( 123, 90 )
+collision_layer = 2
+collision_mask = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Area2D"]
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="Node2D/Area2D" to="Jugador" method="_on_Area2D_body_entered"]
