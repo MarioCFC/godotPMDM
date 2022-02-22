@@ -2,8 +2,8 @@ extends KinematicBody2D
 
 var posicion = Vector2()
 var velocidad = 150
-var potenciaSalto = -150
-var gravedad = 5
+var potenciaSalto = -210
+var gravedad = 10
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -41,5 +41,4 @@ func animacion():
 #Tambien afecta a los TileMaps con collisionShape por lo que hay
 #que cambiar las máscaras de colision
 func _on_Area2D_body_entered(body):
-	print("Respawn")
 	self.global_position = Vector2(98,36)
