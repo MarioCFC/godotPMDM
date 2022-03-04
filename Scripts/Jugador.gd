@@ -25,7 +25,7 @@ func input(delta):
 	
 	if(Input.is_action_just_pressed("ui_up") && is_on_floor()):
 		posicion.y = potenciaSalto 
-		
+	
 	posicion.x = direccionHorizontal * velocidad
 
 func animacion():
