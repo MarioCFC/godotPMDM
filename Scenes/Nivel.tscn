@@ -15,7 +15,7 @@ extents = Vector2( 439.5, 10 )
 [node name="Respawn" type="Node2D" parent="."]
 
 [node name="Area2D" type="Area2D" parent="Respawn"]
-position = Vector2( 627, 93 )
+position = Vector2( 631, 115 )
 collision_layer = 2
 collision_mask = 2
 __meta__ = {
