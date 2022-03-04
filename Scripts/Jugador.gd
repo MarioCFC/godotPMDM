@@ -1,12 +1,15 @@
 extends KinematicBody2D
 
-var posicion = Vector2()
-var velocidad = 150
-var potenciaSalto = -210
-var gravedad = 10
+var posicion:Vector2 = Vector2()
+var velocidad:float = 150
+var potenciaSalto:float = -210
+var gravedad:float = 10
+var maquinaEstados
+var haSaltado:bool
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	maquinaEstados = $AnimationTree.get("parameters/playback")
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,15 +30,19 @@ func input(delta):
 
 func animacion():
 	if(posicion.x != 0 && is_on_floor()):
-		$AnimatedSprite.play("Run")
+		maquinaEstados.travel("Run")
 	elif(is_on_floor()):
-		$AnimatedSprite.play("Idle")
+		maquinaEstados.travel("Idle")
+	elif(is_on_floor() and haSaltado):
+		maquinaEstados.travel("Landig")
+		haSaltado = false
 	elif(!is_on_floor() && posicion.y < 0):
-		$AnimatedSprite.play("Jump_Up")
+		maquinaEstados.travel("Jump_up")
+		haSaltado = true
 	elif(!is_on_floor()):
-		$AnimatedSprite.play("Jump_Down")
+		maquinaEstados.travel("Jump_down")
 	if(posicion.x != 0):
-		$AnimatedSprite.flip_h = posicion.x < 0
+		$PlayerSprite.flip_h = posicion.x < 0
 
 
 #Tambien afecta a los TileMaps con collisionShape por lo que hay

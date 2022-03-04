@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Sprites/tiles/suelos.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Jugador.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scripts/Jugador.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Plataforma.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/CamaraNivel1.gd" type="Script" id=5]
 [ext_resource path="res://Sprites/tiles and background_foreground (new)/background.png" type="Texture" id=6]
@@ -57,7 +56,6 @@ position = Vector2( 143, 32 )
 position = Vector2( 110, 43 )
 collision_layer = 3
 collision_mask = 3
-script = ExtResource( 3 )
 
 [node name="CamaraNivel" type="Camera2D" parent="."]
 position = Vector2( 0, 25 )
