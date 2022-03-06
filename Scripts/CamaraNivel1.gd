@@ -1,4 +1,8 @@
 extends Camera2D
+var inicialCameraHorizontalPosition
 
 func _process(delta):
-	self.position.x =  get_parent().get_node("Jugador").position.x
+	var newPositionCamera = get_parent().get_node("Jugador").position.x
+	if(newPositionCamera <= 115):
+		newPositionCamera = 115
+	self.position.x = newPositionCamera
