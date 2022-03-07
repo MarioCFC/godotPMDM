@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://Sprites/herochar sprites(new)/herochar_spritesheet(new).png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Jugador.gd" type="Script" id=2]
@@ -43,7 +43,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.2 ),
+"times": PoolRealArray( 0.5 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -300,11 +300,14 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=58]
+[sub_resource type="AnimationNodeAnimation" id=66]
 animation = "Attack"
 
 [sub_resource type="AnimationNodeAnimation" id=35]
 animation = "Die"
+
+[sub_resource type="AnimationNodeAnimation" id=67]
+animation = "Attack"
 
 [sub_resource type="AnimationNodeAnimation" id=36]
 animation = "Idle"
@@ -334,12 +337,6 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=55]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=59]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=60]
-switch_mode = 2
-auto_advance = true
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=40]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=41]
@@ -348,32 +345,50 @@ auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=45]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=61]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=62]
-switch_mode = 2
-auto_advance = true
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=63]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=68]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=69]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=70]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=71]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=72]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=73]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=74]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=75]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=76]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=77]
+
 [sub_resource type="AnimationNodeStateMachine" id=46]
-states/Attack/node = SubResource( 58 )
-states/Attack/position = Vector2( 598, 311 )
+states/AirAttack/node = SubResource( 66 )
+states/AirAttack/position = Vector2( -82.1152, 416 )
 states/Die/node = SubResource( 35 )
-states/Die/position = Vector2( 454, 54 )
+states/Die/position = Vector2( 770, 279 )
+states/GeneralAttack/node = SubResource( 67 )
+states/GeneralAttack/position = Vector2( 610, 407 )
 states/Idle/node = SubResource( 36 )
-states/Idle/position = Vector2( 516, 223 )
+states/Idle/position = Vector2( 610, 279 )
 states/Jump_down/node = SubResource( 48 )
-states/Jump_down/position = Vector2( 197, 125 )
+states/Jump_down/position = Vector2( -82.1152, 279 )
 states/Jump_up/node = SubResource( 37 )
-states/Jump_up/position = Vector2( 197, 206 )
+states/Jump_up/position = Vector2( 94, 416 )
 states/Landing/node = SubResource( 49 )
-states/Landing/position = Vector2( 355, 125 )
+states/Landing/position = Vector2( 94, 164 )
 states/Run/node = SubResource( 38 )
-states/Run/position = Vector2( 355, 311 )
-transitions = [ "Landing", "Run", SubResource( 56 ), "Jump_down", "Landing", SubResource( 54 ), "Run", "Jump_up", SubResource( 42 ), "Jump_up", "Jump_down", SubResource( 50 ), "Jump_up", "Landing", SubResource( 53 ), "Landing", "Jump_up", SubResource( 55 ), "Run", "Attack", SubResource( 59 ), "Attack", "Run", SubResource( 60 ), "Idle", "Run", SubResource( 40 ), "Run", "Idle", SubResource( 41 ), "Idle", "Die", SubResource( 39 ), "Idle", "Jump_up", SubResource( 45 ), "Idle", "Attack", SubResource( 61 ), "Attack", "Idle", SubResource( 62 ), "Jump_down", "Idle", SubResource( 63 ) ]
+states/Run/position = Vector2( 368, 416 )
+transitions = [ "Landing", "Run", SubResource( 56 ), "Jump_down", "Landing", SubResource( 54 ), "Run", "Jump_up", SubResource( 42 ), "Jump_up", "Jump_down", SubResource( 50 ), "Jump_up", "Landing", SubResource( 53 ), "Landing", "Jump_up", SubResource( 55 ), "Idle", "Run", SubResource( 40 ), "Run", "Idle", SubResource( 41 ), "Idle", "Die", SubResource( 39 ), "Idle", "Jump_up", SubResource( 45 ), "Jump_down", "Idle", SubResource( 63 ), "Jump_up", "AirAttack", SubResource( 68 ), "AirAttack", "Jump_up", SubResource( 69 ), "Jump_down", "AirAttack", SubResource( 70 ), "AirAttack", "Jump_down", SubResource( 71 ), "Run", "GeneralAttack", SubResource( 72 ), "GeneralAttack", "Run", SubResource( 73 ), "GeneralAttack", "Idle", SubResource( 74 ), "Idle", "GeneralAttack", SubResource( 75 ), "Landing", "Idle", SubResource( 76 ), "Landing", "GeneralAttack", SubResource( 77 ) ]
 start_node = "Idle"
-graph_offset = Vector2( 41.8848, 158 )
+graph_offset = Vector2( -276.115, 159.676 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=47]
 
@@ -404,7 +419,7 @@ parameters/playback = SubResource( 47 )
 texture = ExtResource( 1 )
 hframes = 8
 vframes = 15
-frame = 40
+frame = 41
 
 [node name="AttackNodes" type="Node2D" parent="."]
 
@@ -415,7 +430,7 @@ z_index = -1
 texture = ExtResource( 1 )
 hframes = 8
 vframes = 15
-frame = 113
+frame = 112
 
 [node name="AttackArea" type="Area2D" parent="AttackNodes"]
 position = Vector2( -3, -1 )

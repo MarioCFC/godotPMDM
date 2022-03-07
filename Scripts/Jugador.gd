@@ -7,12 +7,13 @@ var gravedad:float = 10
 var stateMachine : AnimationNodeStateMachinePlayback
 var hasJumped:bool = false
 var isAttacking : bool = false
+#Al saltar hacia la izquierda y atacar no se produce esta ultima accion pero si saltamos a la derecha
+#si que sucede 
 
 func _ready():
 	stateMachine = $AnimationTree.get("parameters/playback")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	input()
 	animacion()
@@ -30,16 +31,19 @@ func input():
 	if(Input.is_action_just_pressed("ui_up") and is_on_floor() ):
 		posicion.y = potenciaSalto 
 	
+	
 	if(Input.is_action_just_pressed("ui_attack")):
 		isAttacking = true
-	if(isAttacking):
-		posicion.x = direccionHorizontal * 50
+	elif(isAttacking and is_on_floor()):
+		posicion.x = 0
 	else:
 		posicion.x = direccionHorizontal * velocidad
 
 func animacion():
-	if(isAttacking):
-		stateMachine.travel("Attack")
+	if(isAttacking and is_on_floor()):
+		stateMachine.travel("GeneralAttack")
+	elif(isAttacking):
+		stateMachine.travel("AirAttack")
 	elif(posicion.x != 0 && is_on_floor()):
 		stateMachine.travel("Run")
 	elif(is_on_floor()):
@@ -57,5 +61,6 @@ func hasattacked():
 	isAttacking = false
 
 func playerEnterDeathZone(body):
-	print("entro")
+#	Aquí se muere
 	self.position = Vector2(98,36)
+	
