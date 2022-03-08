@@ -17,6 +17,9 @@ func _ready():
 
 
 func playerEnterDeathZone(body):
-#	Aquí se muere
 	$Jugador.global_position = Vector2(98,36)
+	body.getDamage()
+
+
+func _on_Jugador_has_been_damaged():
 	$CanvasLayer/HUD.loseHearth()

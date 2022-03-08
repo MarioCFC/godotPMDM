@@ -99,10 +99,10 @@ tile_data = PoolIntArray( 196640, 1, 0, 196641, 1, 1, 196642, 1, 1, 196643, 1, 1
 position = Vector2( -6, 4 )
 z_index = -9
 
-[node name="Plataforma" parent="Plataformas" instance=ExtResource( 4 )]
+[node name="Plataforma" parent="Plataformas" groups=["deathZone"] instance=ExtResource( 4 )]
 position = Vector2( 102, 28 )
 
-[node name="Plataforma2" parent="Plataformas" instance=ExtResource( 4 )]
+[node name="Plataforma2" parent="Plataformas" groups=["deathZone"] instance=ExtResource( 4 )]
 position = Vector2( 204, 28 )
 
 [node name="Jugador" parent="." instance=ExtResource( 2 )]
@@ -137,3 +137,4 @@ anchor_bottom = 0.0
 
 [connection signal="body_entered" from="InvisibleComponents/DeathArea/Area2D" to="." method="playerEnterDeathZone"]
 [connection signal="body_entered" from="InvisibleComponents/DeathArea/Area2D2" to="." method="playerEnterDeathZone"]
+[connection signal="has_been_damaged" from="Jugador" to="." method="_on_Jugador_has_been_damaged"]

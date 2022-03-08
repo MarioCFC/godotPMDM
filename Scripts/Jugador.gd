@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends BaseCharacter
 
 var posicion:Vector2 = Vector2()
 var velocidad:float = 150
@@ -7,6 +7,7 @@ var gravedad:float = 10
 var stateMachine : AnimationNodeStateMachinePlayback
 var hasJumped:bool = false
 var isAttacking : bool = false
+signal has_been_damaged
 #Al saltar hacia la izquierda y atacar no se produce esta ultima accion pero si saltamos a la derecha
 #si que sucede 
 
@@ -58,4 +59,7 @@ func animacion():
 		stateMachine.travel("Jump_down")
 
 func hasattacked():
-	isAttacking = false
+	isAttacking = false	
+
+func getDamage():
+	emit_signal("has_been_damaged")

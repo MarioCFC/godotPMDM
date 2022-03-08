@@ -1,6 +1,7 @@
 extends Control
 
 var actualHeart : IndividualLifeHeart
+onready var hearthLife = preload("res://Scenes/IndividualLifeHearth.tscn")
 # Estaria bien crear funcion que instancie los corazones automaticamente en base a la vida del jugador
 func _ready():
 	activateNextheart()
@@ -13,6 +14,9 @@ func loseHearth():
 	yield(get_tree().create_timer(0.5), "timeout")
 	activateNextheart()
 	
+func genearateLifeHearts():
+	pass
+
 func activateNextheart():
 #	Tecnicamente es un for que recorre la lista desde el ultimo al primero
 	for i in range(get_child_count()-1, -1, -1):
