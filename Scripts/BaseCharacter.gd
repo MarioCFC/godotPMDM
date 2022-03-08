@@ -1,13 +1,27 @@
 extends KinematicBody2D
 class_name BaseCharacter
 
-func _ready():
-	pass # Replace with function body.
+signal has_been_damaged
+var posicion:Vector2 = Vector2()
+var stateMachine : AnimationNodeStateMachinePlayback
+var life : int = 0
 
+func _physics_process(delta):
+	posicion = move_and_slide(posicion,Vector2.UP)
+	movement()
+	animation()
+	
+func loadAnimationStateMachine():
+	stateMachine = $AnimationTree.get("parameters/playback")
+
+func movement():
+	push_error("Desarrolla el motodo 'movement'")
+	assert(false)
+
+func animation():
+	push_error("Desarrolla el motodo 'animation'")
+	assert(false)
+	
 
 func getDamage():
-	print("Dañado")
-	pass
-
-func attack():
-	pass
+	emit_signal("has_been_damaged")

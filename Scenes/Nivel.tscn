@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Sprites/tiles/suelos.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Jugador.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scripts/CamaraNivel1.gd" type="Script" id=5]
 [ext_resource path="res://Sprites/tiles and background_foreground (new)/background.png" type="Texture" id=6]
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Enemigo.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 10, 114.5 )
@@ -105,6 +106,9 @@ position = Vector2( 102, 28 )
 [node name="Plataforma2" parent="Plataformas" groups=["deathZone"] instance=ExtResource( 4 )]
 position = Vector2( 204, 28 )
 
+[node name="Enemigo" parent="." instance=ExtResource( 8 )]
+position = Vector2( 170, 55 )
+
 [node name="Jugador" parent="." instance=ExtResource( 2 )]
 position = Vector2( 8, -24 )
 collision_layer = 3
@@ -137,4 +141,5 @@ anchor_bottom = 0.0
 
 [connection signal="body_entered" from="InvisibleComponents/DeathArea/Area2D" to="." method="playerEnterDeathZone"]
 [connection signal="body_entered" from="InvisibleComponents/DeathArea/Area2D2" to="." method="playerEnterDeathZone"]
+[connection signal="has_been_damaged" from="Enemigo" to="." method="_on_Enemigo_has_been_damaged"]
 [connection signal="has_been_damaged" from="Jugador" to="." method="_on_Jugador_has_been_damaged"]

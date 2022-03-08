@@ -63,28 +63,28 @@ tracks/3/keys = {
 "values": [ true, false ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("AttackNodes/AttackArea:monitoring")
+tracks/4/path = NodePath("AttackNodes/AttackArea/CollisionShape2D:shape")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 0.4 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ SubResource( 65 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("AttackNodes/AttackArea/CollisionShape2D:shape")
+tracks/5/path = NodePath("AttackNodes/AttackArea:monitoring")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ SubResource( 65 ) ]
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=22]
@@ -247,7 +247,7 @@ tracks/0/keys = {
 "values": [ false ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("AttackNodes/AttackArea/CollisionShape2D:shape")
+tracks/1/path = NodePath("AttackNodes/AttackArea:monitoring")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -256,10 +256,10 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ SubResource( 65 ) ]
+"values": [ true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("AttackNodes/AttackArea:monitoring")
+tracks/2/path = NodePath("AttackNodes/AttackArea/CollisionShape2D:shape")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -268,7 +268,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ true ]
+"values": [ SubResource( 65 ) ]
 }
 
 [sub_resource type="Animation" id=12]
@@ -430,11 +430,14 @@ z_index = -1
 texture = ExtResource( 1 )
 hframes = 8
 vframes = 15
-frame = 112
+frame = 114
 
 [node name="AttackArea" type="Area2D" parent="AttackNodes"]
 position = Vector2( -3, -1 )
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackNodes/AttackArea"]
 position = Vector2( 16, 3 )
 shape = SubResource( 65 )
+
+[connection signal="body_entered" from="AttackNodes/AttackArea" to="." method="_on_AttackArea_body_entered"]
