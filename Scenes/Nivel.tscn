@@ -60,10 +60,10 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleComponents/LeftLimitWall"]
 shape = SubResource( 2 )
 
-[node name="Respawn" type="Node2D" parent="InvisibleComponents"]
+[node name="DeathArea" type="Node2D" parent="InvisibleComponents"]
 position = Vector2( 146, 0 )
 
-[node name="Area2D" type="Area2D" parent="InvisibleComponents/Respawn"]
+[node name="Area2D" type="Area2D" parent="InvisibleComponents/DeathArea"]
 position = Vector2( 790, 81 )
 collision_layer = 2
 collision_mask = 2
@@ -71,10 +71,10 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleComponents/Respawn/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleComponents/DeathArea/Area2D"]
 shape = SubResource( 1 )
 
-[node name="Area2D2" type="Area2D" parent="InvisibleComponents/Respawn"]
+[node name="Area2D2" type="Area2D" parent="InvisibleComponents/DeathArea"]
 position = Vector2( -242, 82 )
 collision_layer = 2
 collision_mask = 2
@@ -83,7 +83,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleComponents/Respawn/Area2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleComponents/DeathArea/Area2D2"]
 position = Vector2( 204.5, 0 )
 shape = SubResource( 1 )
 
@@ -135,5 +135,5 @@ position = Vector2( -8, -119 )
 anchor_right = 0.0
 anchor_bottom = 0.0
 
-[connection signal="body_entered" from="InvisibleComponents/Respawn/Area2D" to="Jugador" method="playerEnterDeathZone"]
-[connection signal="body_entered" from="InvisibleComponents/Respawn/Area2D2" to="Jugador" method="playerEnterDeathZone"]
+[connection signal="body_entered" from="InvisibleComponents/DeathArea/Area2D" to="." method="playerEnterDeathZone"]
+[connection signal="body_entered" from="InvisibleComponents/DeathArea/Area2D2" to="." method="playerEnterDeathZone"]

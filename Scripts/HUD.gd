@@ -1,13 +1,23 @@
 extends Control
 
+var actualHeart : IndividualLifeHeart
+# Estaria bien crear funcion que instancie los corazones automaticamente en base a la vida del jugador
+func _ready():
+	activateNextheart()
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	var actualHearth = self.get_children()[get_child_count() - 1] as IndividualLifeHearth
-	actualHearth.get_node("AnimationPlayer").play("Idle")
+func loseHearth():
+	actualHeart.loseHeart()
+	#Apaño rapido el yield deberia de hacerse de tal manera que espera a que el animation player de 
+	#arriba ejecute la senal "animation_finished". Para evitarlo se crea un temporizado que dura lo mismo que la animacion
+	yield(get_tree().create_timer(0.5), "timeout")
+	activateNextheart()
+	
+func activateNextheart():
+#	Tecnicamente es un for que recorre la lista desde el ultimo al primero
+	for i in range(get_child_count()-1, -1, -1):
+		var heart = get_child(i) as IndividualLifeHeart
+		if(!heart.isLosedheart):
+			actualHeart = heart
+			actualHeart.activateHeart()
+			break

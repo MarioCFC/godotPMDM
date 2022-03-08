@@ -59,8 +59,3 @@ func animacion():
 
 func hasattacked():
 	isAttacking = false
-
-func playerEnterDeathZone(body):
-#	Aquí se muere
-	self.position = Vector2(98,36)
-	

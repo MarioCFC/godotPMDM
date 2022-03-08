@@ -14,3 +14,9 @@ func _ready():
 
 #func _process(delta):
 #	pass
+
+
+func playerEnterDeathZone(body):
+#	Aquí se muere
+	$Jugador.global_position = Vector2(98,36)
+	$CanvasLayer/HUD.loseHearth()
