@@ -1,11 +1,15 @@
 extends BaseCharacter
 
-var velocidad:float = 100
+var velocidad:float = 75
 var potenciaSalto:float = -150
 var gravedad:float = 5
 var hasJumped:bool = false
 var isAttacking : bool = false
+var isBeingDamaged : bool = false
+var isDead : bool = false
+var damagedJump = false
 var keyInputs = {"Up":false, "Down":false,"Left":false, "Right":false, "Attack":false}
+signal hasDead
 
 #Al saltar hacia la izquierda y atacar no se produce esta ultima accion pero si saltamos a la derecha
 #si que sucede 
@@ -25,19 +29,28 @@ func movement():
 	var  direccionHorizontal = (int(keyInputs["Right"]) - int(keyInputs["Left"]))
 	
 	#Equivalente el flip ya que godot da problemas al hacerlo mediante la escala = -1 en los kinematic cambiando el scale en el transform, este es mediante matrices
-	if direccionHorizontal != 0: 
+	if direccionHorizontal != 0 and not isBeingDamaged: 
 		set_transform(Transform2D(Vector2(direccionHorizontal,0),Vector2(0,1),Vector2(position.x,position.y)))
 	
 	if(isAttacking and is_on_floor()):
 		posicion.x = 0
+	elif(isBeingDamaged):
+		var direccionDesplazado:int
+#		Apaño para saber en direccion está mirando ya que no puede aprovechar la variable scale de transform
+# 		por lo mismo que no puedo usar flip.
+#		Como el collisionShape del ataque siempre esta por delante del personaje lo uso para saber en 
+# 		que direccion mira en el momento que es dañado
+		direccionDesplazado = -1 if $AttackNodes/AttackArea/CollisionShape2D.global_position.x - self.global_position.x > 0 else 1
+		posicion.x = direccionDesplazado * velocidad / 1.5
+		
+		if(damagedJump):
+			posicion.y = potenciaSalto /2
+			damagedJump = !damagedJump
 	else:
 		posicion.x = direccionHorizontal * velocidad
-		
-#	Movimiento vertical	
+		if(keyInputs["Up"] and is_on_floor() ):
+			posicion.y = potenciaSalto 
 	posicion.y += gravedad
-	
-	if(keyInputs["Up"] and is_on_floor() ):
-		posicion.y = potenciaSalto 
 
 func inputs():
 	keyInputs["Up"] = Input.is_action_just_pressed("ui_up")
@@ -54,6 +67,10 @@ func animation():
 		stateMachine.travel("GeneralAttack")
 	elif(isAttacking):
 		stateMachine.travel("AirAttack")
+	elif(isBeingDamaged):
+		stateMachine.travel("Damaged")
+	elif(isDead):
+		stateMachine.travel("Die")
 	elif(posicion.x != 0 && is_on_floor()):
 		stateMachine.travel("Run")
 	elif(is_on_floor()):
@@ -67,10 +84,21 @@ func animation():
 	elif(!is_on_floor()):
 		stateMachine.travel("Jump_down")
 
-func hasattacked():
-	isAttacking = false	
+func hasttacked():
+	isAttacking = false
 
-
+#No se puede pasar a la super clase
 func _on_AttackArea_body_entered(body):
 	if(body is BaseCharacter):
 		body.getDamage()
+
+#Muy casero lo del yield, hacer que sea coherente con el attack y el die
+#Intentar que la muerte del jugador se encargue el nivel
+func getDamage():
+	isBeingDamaged = true
+	damagedJump = true
+	yield(get_tree().create_timer(0.3), "timeout")
+	isBeingDamaged = false
+	life -=1
+#	isDead = life == 0
+	emit_signal("has_been_damaged")

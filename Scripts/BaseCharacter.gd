@@ -7,9 +7,9 @@ var stateMachine : AnimationNodeStateMachinePlayback
 var life : int = 0
 
 func _physics_process(delta):
-	posicion = move_and_slide(posicion,Vector2.UP)
 	movement()
 	animation()
+	posicion = move_and_slide(posicion,Vector2.UP)
 	
 func loadAnimationStateMachine():
 	stateMachine = $AnimationTree.get("parameters/playback")
@@ -24,4 +24,6 @@ func animation():
 	
 
 func getDamage():
-	emit_signal("has_been_damaged")
+#	push_error("Desarrolla el motodo 'animation'")
+#	assert(false)
+	pass

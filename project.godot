@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="juegoPDMDGodot"
-run/main_scene="res://Scenes/Nivel.tscn"
+run/main_scene="res://Scenes/PressStartScreen.tscn"
 config/icon="res://icon.png"
 
 [display]
@@ -41,6 +41,8 @@ window/stretch/aspect="keep"
 
 debug=false
 viewpo=false
+colli=false
+collision=false
 
 [input]
 

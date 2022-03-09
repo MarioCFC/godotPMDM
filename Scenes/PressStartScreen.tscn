@@ -1,0 +1,112 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/PressStartScreen.gd" type="Script" id=1]
+[ext_resource path="res://Znalezione obrazy dla zapytania pixel art forest.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/hud elements/fonts.png" type="Texture" id=3]
+
+[sub_resource type="TileSet" id=3]
+0/name = "fonts.png 0"
+0/texture = ExtResource( 3 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 70, 28 )
+0/tile_mode = 2
+0/autotile/icon_coordinate = Vector2( 0, 0 )
+0/autotile/tile_size = Vector2( 7, 7 )
+0/autotile/spacing = 0
+0/autotile/occluder_map = [  ]
+0/autotile/navpoly_map = [  ]
+0/autotile/priority_map = [  ]
+0/autotile/z_index_map = [  ]
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape_one_way = false
+0/shape_one_way_margin = 0.0
+0/shapes = [  ]
+0/z_index = 0
+
+[sub_resource type="Animation" id=1]
+resource_name = "Idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Node2D/LetrasPequeña:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.839216, 0.831373, 0.831373, 1 ), Color( 0.839216, 0.831373, 0.831373, 0.137255 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Node2D/LetrasPequeña:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="PressStartScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ZnalezioneObrazyDlaZapytaniaPixelArtForest" type="Sprite" parent="."]
+modulate = Color( 0.329412, 0.329412, 0.329412, 1 )
+position = Vector2( 113, 57 )
+scale = Vector2( 0.457317, 0.397222 )
+texture = ExtResource( 2 )
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 16, 10 )
+scale = Vector2( 4, 4 )
+
+[node name="LetrasGeneral" type="TileMap" parent="Node2D"]
+modulate = Color( 0.658824, 0.658824, 0.658824, 1 )
+position = Vector2( 17.375, 17.5 )
+scale = Vector2( 0.5, 0.5 )
+tile_set = SubResource( 3 )
+cell_size = Vector2( 7, 7 )
+cell_quadrant_size = 7
+cell_custom_transform = Transform2D( 7, 0, 0, 7, 0, 0 )
+format = 1
+tile_data = PoolIntArray( -131073, 0, 131076, -196608, 0, 131079, -196607, 0, 65537, -196606, 0, 65544, -196605, 0, 65539, -196604, 0, 65539, -196603, 0, 65540, -196602, 0, 131075, -65537, 0, 131076, -131072, 0, 131079, -131071, 0, 65540, -131070, 0, 131080, -131069, 0, 131081 )
+
+[node name="LetraGrande" type="TileMap" parent="Node2D"]
+modulate = Color( 0.658824, 0.658824, 0.658824, 1 )
+tile_set = SubResource( 3 )
+cell_size = Vector2( 7, 7 )
+cell_quadrant_size = 7
+cell_custom_transform = Transform2D( 7, 0, 0, 7, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 65537, 0, 65541 )
+
+[node name="LetrasPequeña" type="TileMap" parent="Node2D"]
+position = Vector2( -0.25, -2 )
+scale = Vector2( 0.25, 0.25 )
+tile_set = SubResource( 3 )
+cell_size = Vector2( 7, 7 )
+cell_quadrant_size = 7
+cell_custom_transform = Transform2D( 7, 0, 0, 7, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 786435, 0, 131077, 786436, 0, 131079, 786437, 0, 65540, 786438, 0, 131080, 786439, 0, 131080, 786441, 0, 65536, 786442, 0, 131075, 786443, 0, 196612, 786445, 0, 131072, 786446, 0, 65540, 786447, 0, 196612, 786449, 0, 131081, 786450, 0, 131076, 786452, 0, 131080, 786453, 0, 131081, 786454, 0, 65536, 786455, 0, 131079, 786456, 0, 131081 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
+anims/Idle = SubResource( 1 )
+anims/RESET = SubResource( 2 )

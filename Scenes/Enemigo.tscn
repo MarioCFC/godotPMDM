@@ -1,13 +1,21 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=32 format=2]
 
+[ext_resource path="res://SFX/EnemyDie.wav" type="AudioStream" id=1]
 [ext_resource path="res://Sprites/enemies sprites/goblin/goblin_spritesheet.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Enemigo.gd" type="Script" id=3]
+[ext_resource path="res://SFX/EnemyDie.ogg" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=66]
 extents = Vector2( 5.5, 7.5 )
 
 [sub_resource type="AnimationNodeAnimation" id=67]
 animation = "Attack"
+
+[sub_resource type="AnimationNodeAnimation" id=83]
+animation = "Damaged"
+
+[sub_resource type="AnimationNodeAnimation" id=90]
+animation = "Die"
 
 [sub_resource type="AnimationNodeAnimation" id=68]
 animation = "Idle"
@@ -31,23 +39,43 @@ auto_advance = true
 switch_mode = 2
 auto_advance = true
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=84]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=85]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=86]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=87]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=88]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=91]
+switch_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id=76]
 states/Attack/node = SubResource( 67 )
-states/Attack/position = Vector2( 275.885, 245.676 )
+states/Attack/position = Vector2( 303.885, 319.676 )
+states/Damaged/node = SubResource( 83 )
+states/Damaged/position = Vector2( -136.115, 319.676 )
+states/Die/node = SubResource( 90 )
+states/Die/position = Vector2( -338.115, 319.676 )
 states/Idle/node = SubResource( 68 )
-states/Idle/position = Vector2( 46.885, 245.676 )
+states/Idle/position = Vector2( 46.885, 246.676 )
 states/Run/node = SubResource( 69 )
 states/Run/position = Vector2( 46.885, 413.676 )
-transitions = [ "Idle", "Run", SubResource( 70 ), "Run", "Idle", SubResource( 71 ), "Idle", "Attack", SubResource( 72 ), "Attack", "Idle", SubResource( 73 ), "Run", "Attack", SubResource( 74 ), "Attack", "Run", SubResource( 75 ) ]
+transitions = [ "Idle", "Run", SubResource( 70 ), "Run", "Idle", SubResource( 71 ), "Idle", "Attack", SubResource( 72 ), "Attack", "Idle", SubResource( 73 ), "Run", "Attack", SubResource( 74 ), "Attack", "Run", SubResource( 75 ), "Idle", "Damaged", SubResource( 84 ), "Run", "Damaged", SubResource( 85 ), "Attack", "Damaged", SubResource( 86 ), "Damaged", "Idle", SubResource( 87 ), "Damaged", "Run", SubResource( 88 ), "Damaged", "Die", SubResource( 91 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -276.115, 159.676 )
+graph_offset = Vector2( -634.115, 191.676 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=77]
 
 [sub_resource type="Animation" id=78]
 resource_name = "Attack"
-length = 0.5
-loop = true
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("EnemySprite:hframes")
 tracks/0/interp = 1
@@ -55,34 +83,145 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 4, 6 ]
+"values": [ 4 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("AttackNodes/AttackArea:monitoring")
+tracks/1/path = NodePath("EnemySprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.4 ),
+"times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
+"update": 0,
+"values": [ 8, 11 ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("EnemySprite:frame")
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hasAttacked"
+} ]
+}
+
+[sub_resource type="Animation" id=82]
+resource_name = "Damaged"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("EnemySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 8, 11 ]
+"values": [ 24, 27 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hasAttacked"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("EnemySprite:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 6 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AttackNodes/AttackArea:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=89]
+resource_name = "Die"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("EnemySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 6, 11 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AudioStreamPlayer2D:stream")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
 }
 
 [sub_resource type="Animation" id=79]
@@ -100,6 +239,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 18, 21 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("EnemySprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 6 ]
 }
 
 [sub_resource type="Animation" id=80]
@@ -152,6 +303,30 @@ tracks/3/keys = {
 "update": 0,
 "values": [ true ]
 }
+tracks/4/type = "value"
+tracks/4/path = NodePath("AudioStreamPlayer2D:stream")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=81]
 resource_name = "Run"
@@ -164,16 +339,29 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( -0.4, 0.6 ),
+"times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 0, 5 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("EnemySprite:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 6 ]
+}
 
 [sub_resource type="RectangleShape2D" id=65]
-extents = Vector2( 3, 2 )
+extents = Vector2( 3.5, 2 )
 
 [node name="Enemigo" type="KinematicBody2D"]
+collision_layer = 4
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["mobs"]]
@@ -183,10 +371,13 @@ shape = SubResource( 66 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 76 )
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/playback = SubResource( 77 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Attack = SubResource( 78 )
+anims/Damaged = SubResource( 82 )
+anims/Die = SubResource( 89 )
 anims/Idle = SubResource( 79 )
 anims/RESET = SubResource( 80 )
 anims/Run = SubResource( 81 )
@@ -201,8 +392,30 @@ frame = 18
 
 [node name="AttackArea" type="Area2D" parent="AttackNodes"]
 position = Vector2( -3, -1 )
+collision_layer = 4
+collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackNodes/AttackArea"]
-position = Vector2( 11, 4 )
+position = Vector2( 11.5, 3 )
 shape = SubResource( 65 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D" groups=["mobs"]]
+position = Vector2( -0.5, 0.5 )
+shape = SubResource( 66 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 8, 2 )
+enabled = true
+cast_to = Vector2( 0, 10 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 1 )
+
+[connection signal="body_entered" from="AttackNodes/AttackArea" to="." method="_on_AttackArea_body_entered"]
+[connection signal="body_exited" from="AttackNodes/AttackArea" to="." method="_on_AttackArea_body_exited"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_touch"]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/14 Mysterious Woods.mp3-653e5f837b6df09e739521b75ffc2475.mp3str"
+
+[deps]
+
+source_file="res://SFX/14 Mysterious Woods.mp3"
+dest_files=[ "res://.import/14 Mysterious Woods.mp3-653e5f837b6df09e739521b75ffc2475.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

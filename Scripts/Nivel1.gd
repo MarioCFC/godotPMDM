@@ -23,7 +23,5 @@ func playerEnterDeathZone(body):
 
 func _on_Jugador_has_been_damaged():
 	$CanvasLayer/HUD.loseHearth()
-
-
-func _on_Enemigo_has_been_damaged():
-	print("Aaa joder que daño")
+	if $Jugador.life == 0:
+		

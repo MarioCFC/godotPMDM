@@ -1,7 +1,10 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://Sprites/herochar sprites(new)/herochar_spritesheet(new).png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Jugador.gd" type="Script" id=2]
+[ext_resource path="res://SFX/sword_attack.wav" type="AudioStream" id=3]
+[ext_resource path="res://SFX/sword_attack.ogg" type="AudioStream" id=4]
+[ext_resource path="res://SFX/Hit.ogg" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 5.5, 7 )
@@ -43,11 +46,11 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.5 ),
+"times": PoolRealArray( 0.4 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
-"method": "hasattacked"
+"method": "hasttacked"
 } ]
 }
 tracks/3/type = "value"
@@ -84,6 +87,96 @@ tracks/5/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
+"values": [ true, false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AudioStreamPlayer:stream")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("AudioStreamPlayer:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.22 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=78]
+resource_name = "Damaged"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 64, 67 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AttackNodes/AttackSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hasttacked"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AudioStreamPlayer:stream")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AudioStreamPlayer:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
 "values": [ true, false ]
 }
 
@@ -137,7 +230,7 @@ tracks/1/path = NodePath("AttackNodes/AttackSprite:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
-tracks/1/enabled = false
+tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
@@ -270,6 +363,42 @@ tracks/2/keys = {
 "update": 0,
 "values": [ SubResource( 65 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("PlayerSprite:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 64 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AudioStreamPlayer:stream")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 3 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AudioStreamPlayer:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=12]
 resource_name = "Run"
@@ -303,6 +432,9 @@ tracks/1/keys = {
 [sub_resource type="AnimationNodeAnimation" id=66]
 animation = "Attack"
 
+[sub_resource type="AnimationNodeAnimation" id=79]
+animation = "Damaged"
+
 [sub_resource type="AnimationNodeAnimation" id=35]
 animation = "Die"
 
@@ -332,8 +464,6 @@ switch_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id=42]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=50]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=53]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=55]
 
@@ -369,30 +499,56 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=77]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=80]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=81]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=82]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=83]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=84]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=85]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=86]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=87]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=88]
+
 [sub_resource type="AnimationNodeStateMachine" id=46]
 states/AirAttack/node = SubResource( 66 )
 states/AirAttack/position = Vector2( -82.1152, 416 )
+states/Damaged/node = SubResource( 79 )
+states/Damaged/position = Vector2( 610, 528.676 )
 states/Die/node = SubResource( 35 )
 states/Die/position = Vector2( 770, 279 )
 states/GeneralAttack/node = SubResource( 67 )
-states/GeneralAttack/position = Vector2( 610, 407 )
+states/GeneralAttack/position = Vector2( 770, 430 )
 states/Idle/node = SubResource( 36 )
 states/Idle/position = Vector2( 610, 279 )
 states/Jump_down/node = SubResource( 48 )
-states/Jump_down/position = Vector2( -82.1152, 279 )
+states/Jump_down/position = Vector2( -76.1152, 279 )
 states/Jump_up/node = SubResource( 37 )
-states/Jump_up/position = Vector2( 94, 416 )
+states/Jump_up/position = Vector2( 94, 423 )
 states/Landing/node = SubResource( 49 )
 states/Landing/position = Vector2( 94, 164 )
 states/Run/node = SubResource( 38 )
 states/Run/position = Vector2( 368, 416 )
-transitions = [ "Landing", "Run", SubResource( 56 ), "Jump_down", "Landing", SubResource( 54 ), "Run", "Jump_up", SubResource( 42 ), "Jump_up", "Jump_down", SubResource( 50 ), "Jump_up", "Landing", SubResource( 53 ), "Landing", "Jump_up", SubResource( 55 ), "Idle", "Run", SubResource( 40 ), "Run", "Idle", SubResource( 41 ), "Idle", "Die", SubResource( 39 ), "Idle", "Jump_up", SubResource( 45 ), "Jump_down", "Idle", SubResource( 63 ), "Jump_up", "AirAttack", SubResource( 68 ), "AirAttack", "Jump_up", SubResource( 69 ), "Jump_down", "AirAttack", SubResource( 70 ), "AirAttack", "Jump_down", SubResource( 71 ), "Run", "GeneralAttack", SubResource( 72 ), "GeneralAttack", "Run", SubResource( 73 ), "GeneralAttack", "Idle", SubResource( 74 ), "Idle", "GeneralAttack", SubResource( 75 ), "Landing", "Idle", SubResource( 76 ), "Landing", "GeneralAttack", SubResource( 77 ) ]
+transitions = [ "Landing", "Run", SubResource( 56 ), "Jump_down", "Landing", SubResource( 54 ), "Run", "Jump_up", SubResource( 42 ), "Jump_up", "Jump_down", SubResource( 50 ), "Landing", "Jump_up", SubResource( 55 ), "Idle", "Run", SubResource( 40 ), "Run", "Idle", SubResource( 41 ), "Idle", "Die", SubResource( 39 ), "Idle", "Jump_up", SubResource( 45 ), "Jump_down", "Idle", SubResource( 63 ), "Jump_up", "AirAttack", SubResource( 68 ), "AirAttack", "Jump_up", SubResource( 69 ), "Jump_down", "AirAttack", SubResource( 70 ), "AirAttack", "Jump_down", SubResource( 71 ), "Run", "GeneralAttack", SubResource( 72 ), "GeneralAttack", "Run", SubResource( 73 ), "GeneralAttack", "Idle", SubResource( 74 ), "Idle", "GeneralAttack", SubResource( 75 ), "Landing", "Idle", SubResource( 76 ), "Landing", "GeneralAttack", SubResource( 77 ), "Run", "Damaged", SubResource( 80 ), "Damaged", "Run", SubResource( 81 ), "GeneralAttack", "Damaged", SubResource( 82 ), "Idle", "Damaged", SubResource( 83 ), "Damaged", "Idle", SubResource( 84 ), "Landing", "Damaged", SubResource( 85 ), "Jump_down", "Damaged", SubResource( 86 ), "Jump_up", "Damaged", SubResource( 87 ), "AirAttack", "Damaged", SubResource( 88 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -276.115, 159.676 )
+end_node = "Die"
+graph_offset = Vector2( -260.138, 124.716 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=47]
 
-[node name="Jugador" type="KinematicBody2D"]
+[node name="Jugador" type="KinematicBody2D" groups=["Player"]]
+collision_layer = 2
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -401,6 +557,7 @@ shape = SubResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Attack = SubResource( 14 )
+anims/Damaged = SubResource( 78 )
 anims/Die = SubResource( 22 )
 anims/Idle = SubResource( 9 )
 anims/Jump_down = SubResource( 30 )
@@ -419,25 +576,29 @@ parameters/playback = SubResource( 47 )
 texture = ExtResource( 1 )
 hframes = 8
 vframes = 15
-frame = 41
+frame = 64
 
 [node name="AttackNodes" type="Node2D" parent="."]
 
 [node name="AttackSprite" type="Sprite" parent="AttackNodes"]
 visible = false
 position = Vector2( 13, 0 )
-z_index = -1
 texture = ExtResource( 1 )
 hframes = 8
 vframes = 15
-frame = 114
+frame = 115
 
 [node name="AttackArea" type="Area2D" parent="AttackNodes"]
-position = Vector2( -3, -1 )
+collision_layer = 2
+collision_mask = 4
+input_pickable = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackNodes/AttackArea"]
-position = Vector2( 16, 3 )
+position = Vector2( 13, 2 )
 shape = SubResource( 65 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
 
 [connection signal="body_entered" from="AttackNodes/AttackArea" to="." method="_on_AttackArea_body_entered"]
