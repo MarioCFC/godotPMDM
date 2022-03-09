@@ -30,9 +30,9 @@ func movement():
 	
 	#Equivalente el flip ya que godot da problemas al hacerlo mediante la escala = -1 en los kinematic cambiando el scale en el transform, este es mediante matrices
 	if direccionHorizontal != 0 and not isBeingDamaged: 
-		set_transform(Transform2D(Vector2(direccionHorizontal,0),Vector2(0,1),Vector2(position.x,position.y)))
-	
-	if(isAttacking and is_on_floor()):
+		flipX(direccionHorizontal < 0)
+		
+	if((isAttacking or isDead)and is_on_floor()):
 		posicion.x = 0
 	elif(isBeingDamaged):
 		var direccionDesplazado:int
@@ -99,6 +99,24 @@ func getDamage():
 	damagedJump = true
 	yield(get_tree().create_timer(0.3), "timeout")
 	isBeingDamaged = false
-	life -=1
-#	isDead = life == 0
 	emit_signal("has_been_damaged")
+	
+	life -=1
+	isDead = life == 0
+	if isDead:
+		set_collision_layer(0)
+		yield(get_tree().create_timer(0.7), "timeout")
+		hasDied()
+
+func hasDied():
+	emit_signal("hasDead")
+	queue_free()
+
+func flipX(valor:bool):
+	$PlayerSprite.flip_h = valor
+	$AttackNodes/AttackSprite.flip_h = valor
+	
+	var direccion = -1 if valor else 1
+	$AttackNodes/AttackArea/CollisionShape2D.position.x = direccion * 13
+	$AttackNodes/AttackSprite.position.x = direccion * 13
+	

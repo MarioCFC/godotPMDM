@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Sprites/tiles/suelos.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Jugador.tscn" type="PackedScene" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://Scenes/Enemigo.tscn" type="PackedScene" id=8]
 [ext_resource path="res://SFX/theme-5.ogg" type="AudioStream" id=9]
 [ext_resource path="res://SFX/Mysterious_Woods-Zelda.ogg" type="AudioStream" id=10]
+[ext_resource path="res://Scenes/GameOverScreen.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/WinScreen.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 10, 114.5 )
@@ -21,28 +23,67 @@ extents = Vector2( 439.5, 10 )
 resource_name = "Entrada"
 length = 1.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("Jugador:position")
+tracks/0/path = NodePath("AudioStreamPlayer:playing")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 1, 1.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 8, -24 ), Vector2( 49, 55 ) ]
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("AudioStreamPlayer:playing")
+tracks/1/path = NodePath("AudioStreamPlayer:volume_db")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -20.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Jugador:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -14, -115 ), Vector2( 68, 56 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AudioStreamPlayer:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
+"update": 0,
 "values": [ true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AudioStreamPlayer:stream")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 9 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("AudioStreamPlayer:volume_db")
@@ -51,52 +92,13 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ -20.0, 0.0 ]
-}
-
-[sub_resource type="Animation" id=4]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("Jugador:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 8, -24 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Jugador:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("AudioStreamPlayer:playing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ true ]
+"values": [ -10.0 ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("AudioStreamPlayer:stream")
+tracks/3/path = NodePath("Jugador:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -105,19 +107,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ ExtResource( 9 ) ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("AudioStreamPlayer:volume_db")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ -10.0 ]
+"values": [ Vector2( -14, -115 ) ]
 }
 
 [node name="Nivel" type="Node2D"]
@@ -142,7 +132,6 @@ position = Vector2( 146, 0 )
 
 [node name="Area2D" type="Area2D" parent="InvisibleComponents/DeathArea"]
 position = Vector2( 790, 81 )
-collision_layer = 0
 collision_mask = 2
 __meta__ = {
 "_edit_group_": true
@@ -153,7 +142,6 @@ shape = SubResource( 1 )
 
 [node name="Area2D2" type="Area2D" parent="InvisibleComponents/DeathArea"]
 position = Vector2( -242, 82 )
-collision_layer = 0
 collision_mask = 2
 monitorable = false
 __meta__ = {
@@ -187,7 +175,7 @@ tile_data = PoolIntArray( -65487, 13, 0, 15, 9, 0, 16, 9, 1, 17, 9, 2, 48, 9, 0,
 [node name="Enemigos" type="Node2D" parent="NPCs"]
 
 [node name="Enemigo" parent="NPCs/Enemigos" instance=ExtResource( 8 )]
-position = Vector2( 93, 47 )
+position = Vector2( 111, 50 )
 
 [node name="Enemigo2" parent="NPCs/Enemigos" instance=ExtResource( 8 )]
 position = Vector2( 168, 21 )
@@ -196,7 +184,7 @@ position = Vector2( 168, 21 )
 position = Vector2( 436, -9 )
 
 [node name="Enemigo4" parent="NPCs/Enemigos" instance=ExtResource( 8 )]
-position = Vector2( 535, 40 )
+position = Vector2( 695, 16 )
 
 [node name="Enemigo5" parent="NPCs/Enemigos" instance=ExtResource( 8 )]
 position = Vector2( 1054, 52 )
@@ -216,7 +204,7 @@ posicionSpawn = Vector2( 198, 60 )
 posicionSpawn = Vector2( 220, 60 )
 
 [node name="Jugador" parent="." instance=ExtResource( 2 )]
-position = Vector2( 16.2, -8.2 )
+position = Vector2( 68, 56 )
 
 [node name="CamaraNivel" type="Camera2D" parent="."]
 position = Vector2( 0, 25 )
@@ -244,16 +232,31 @@ position = Vector2( -193, 203 )
 anchor_right = 0.0
 anchor_bottom = 0.0
 
+[node name="GameOverScreen" parent="CanvasLayer" instance=ExtResource( 11 )]
+
+[node name="WinScreen" parent="CanvasLayer" instance=ExtResource( 12 )]
+show_behind_parent = true
+margin_left = -229.0
+margin_top = 0.0
+margin_right = -229.0
+margin_bottom = 0.0
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
-volume_db = -20.0
 
 [connection signal="body_entered" from="InvisibleComponents/DeathArea/Area2D" to="." method="playerEnterDeathZone"]
 [connection signal="body_entered" from="InvisibleComponents/DeathArea/Area2D2" to="." method="playerEnterDeathZone"]
+[connection signal="hasDied" from="NPCs/Enemigos/Enemigo" to="." method="_on_Enemigo_hasDied"]
 [connection signal="has_been_damaged" from="NPCs/Enemigos/Enemigo" to="." method="_on_Enemigo_has_been_damaged"]
+[connection signal="hasDied" from="NPCs/Enemigos/Enemigo2" to="." method="_on_Enemigo_hasDied"]
 [connection signal="has_been_damaged" from="NPCs/Enemigos/Enemigo2" to="." method="_on_Enemigo_has_been_damaged"]
+[connection signal="hasDied" from="NPCs/Enemigos/Enemigo3" to="." method="_on_Enemigo_hasDied"]
 [connection signal="has_been_damaged" from="NPCs/Enemigos/Enemigo3" to="." method="_on_Enemigo_has_been_damaged"]
+[connection signal="hasDied" from="NPCs/Enemigos/Enemigo4" to="." method="_on_Enemigo_hasDied"]
 [connection signal="has_been_damaged" from="NPCs/Enemigos/Enemigo4" to="." method="_on_Enemigo_has_been_damaged"]
+[connection signal="hasDied" from="NPCs/Enemigos/Enemigo5" to="." method="_on_Enemigo_hasDied"]
 [connection signal="has_been_damaged" from="NPCs/Enemigos/Enemigo5" to="." method="_on_Enemigo_has_been_damaged"]
+[connection signal="hasDied" from="NPCs/Enemigos/Enemigo6" to="." method="_on_Enemigo_hasDied"]
 [connection signal="has_been_damaged" from="NPCs/Enemigos/Enemigo6" to="." method="_on_Enemigo_has_been_damaged"]
+[connection signal="hasDead" from="Jugador" to="." method="_on_Jugador_hasDead"]
 [connection signal="has_been_damaged" from="Jugador" to="." method="_on_Jugador_has_been_damaged"]

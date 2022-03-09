@@ -237,6 +237,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:collision_layer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 2 ]
+}
 
 [sub_resource type="Animation" id=30]
 resource_name = "Jump_down"
@@ -399,6 +411,18 @@ tracks/5/keys = {
 "update": 0,
 "values": [ false ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath(".:collision_layer")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
 
 [sub_resource type="Animation" id=12]
 resource_name = "Run"
@@ -543,12 +567,12 @@ states/Run/position = Vector2( 368, 416 )
 transitions = [ "Landing", "Run", SubResource( 56 ), "Jump_down", "Landing", SubResource( 54 ), "Run", "Jump_up", SubResource( 42 ), "Jump_up", "Jump_down", SubResource( 50 ), "Landing", "Jump_up", SubResource( 55 ), "Idle", "Run", SubResource( 40 ), "Run", "Idle", SubResource( 41 ), "Idle", "Die", SubResource( 39 ), "Idle", "Jump_up", SubResource( 45 ), "Jump_down", "Idle", SubResource( 63 ), "Jump_up", "AirAttack", SubResource( 68 ), "AirAttack", "Jump_up", SubResource( 69 ), "Jump_down", "AirAttack", SubResource( 70 ), "AirAttack", "Jump_down", SubResource( 71 ), "Run", "GeneralAttack", SubResource( 72 ), "GeneralAttack", "Run", SubResource( 73 ), "GeneralAttack", "Idle", SubResource( 74 ), "Idle", "GeneralAttack", SubResource( 75 ), "Landing", "Idle", SubResource( 76 ), "Landing", "GeneralAttack", SubResource( 77 ), "Run", "Damaged", SubResource( 80 ), "Damaged", "Run", SubResource( 81 ), "GeneralAttack", "Damaged", SubResource( 82 ), "Idle", "Damaged", SubResource( 83 ), "Damaged", "Idle", SubResource( 84 ), "Landing", "Damaged", SubResource( 85 ), "Jump_down", "Damaged", SubResource( 86 ), "Jump_up", "Damaged", SubResource( 87 ), "AirAttack", "Damaged", SubResource( 88 ) ]
 start_node = "Idle"
 end_node = "Die"
-graph_offset = Vector2( -260.138, 124.716 )
+graph_offset = Vector2( -242.138, 190.716 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=47]
 
 [node name="Jugador" type="KinematicBody2D" groups=["Player"]]
-collision_layer = 2
+collision_layer = 0
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -28,7 +28,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ false ]
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -44,7 +44,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1.2, 1.7 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 35, -20 ), Vector2( 35, -20 ), Vector2( 35, 40 ) ]
+"values": [ Vector2( 45, -20 ), Vector2( 45, -20 ), Vector2( 45, 40 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("..:modulate")
@@ -107,10 +107,12 @@ tracks/5/keys = {
 "values": [ true, false ]
 }
 
-[node name="GameOverScreen" type="Control"]
+[node name="WinScreen" type="Control"]
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = -1.0
+margin_bottom = -1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -131,9 +133,9 @@ anims/RESET = SubResource( 3 )
 anims/Titulo = SubResource( 2 )
 
 [node name="Control" type="Control" parent="."]
-margin_left = 35.0
+margin_left = 45.0
 margin_top = -20.0
-margin_right = 35.0
+margin_right = 45.0
 margin_bottom = -20.0
 rect_scale = Vector2( 3, 3 )
 __meta__ = {
@@ -165,7 +167,7 @@ position = Vector2( 28, 0 )
 texture = ExtResource( 1 )
 hframes = 10
 vframes = 5
-frame = 13
+frame = 32
 
 [node name="Sprite5" type="Sprite" parent="Control"]
 position = Vector2( 36, 0 )
@@ -179,23 +181,17 @@ position = Vector2( 44, 0 )
 texture = ExtResource( 1 )
 hframes = 10
 vframes = 5
-frame = 14
-
-[node name="Sprite7" type="Sprite" parent="Control"]
-position = Vector2( 52, 0 )
-texture = ExtResource( 1 )
-hframes = 10
-vframes = 5
-frame = 13
+frame = 23
 
 [node name="Button" type="Button" parent="."]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = 78.0
+margin_left = 79.0
 margin_top = 63.0
-margin_right = 149.0
+margin_right = 150.0
 margin_bottom = 81.0
 custom_fonts/font = ExtResource( 2 )
-text = "Try Again"
+disabled = true
+text = "Repeat"
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false

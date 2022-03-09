@@ -9,6 +9,7 @@ var direccionHorizontal = 1
 var potenciaSalto:float = 75
 var isBeingDamaged = false
 var damagedJump = false
+signal hasDied
 
 func _ready():
 	life = 3
@@ -57,6 +58,10 @@ func attack():
 
 func hasAttacked():
 	isAttacking = false
+
+func hasDied():
+	emit_signal("hasDied")
+	queue_free()
 
 func _on_body_touch(body):
 	if(body is BaseCharacter):

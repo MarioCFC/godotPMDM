@@ -196,7 +196,7 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
-"method": "queue_free"
+"method": "hasDied"
 } ]
 }
 tracks/2/type = "value"
@@ -360,7 +360,7 @@ tracks/1/keys = {
 [sub_resource type="RectangleShape2D" id=65]
 extents = Vector2( 3.5, 2 )
 
-[node name="Enemigo" type="KinematicBody2D"]
+[node name="Enemigo" type="KinematicBody2D" groups=["Enemies"]]
 collision_layer = 4
 script = ExtResource( 3 )
 
