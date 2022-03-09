@@ -2,7 +2,6 @@ extends Control
 
 var actualHeart : IndividualLifeHeart
 onready var hearthLife = preload("res://Scenes/IndividualLifeHearth.tscn")
-# Estaria bien crear funcion que instancie los corazones automaticamente en base a la vida del jugador
 func _ready():
 	activateNextheart()
 

@@ -11,6 +11,8 @@ var damagedJump = false
 var keyInputs = {"Up":false, "Down":false,"Left":false, "Right":false, "Attack":false}
 signal hasDead
 
+#LEER README ANTES DE JUGAR
+
 #Al saltar hacia la izquierda y atacar no se produce esta ultima accion pero si saltamos a la derecha
 #si que sucede 
 func _ready():
@@ -28,7 +30,6 @@ func movement():
 #	Movimiento horizontal
 	var  direccionHorizontal = (int(keyInputs["Right"]) - int(keyInputs["Left"]))
 	
-	#Equivalente el flip ya que godot da problemas al hacerlo mediante la escala = -1 en los kinematic cambiando el scale en el transform, este es mediante matrices
 	if direccionHorizontal != 0 and not isBeingDamaged: 
 		flipX(direccionHorizontal < 0)
 		
@@ -87,7 +88,6 @@ func animation():
 func hasttacked():
 	isAttacking = false
 
-#No se puede pasar a la super clase
 func _on_AttackArea_body_entered(body):
 	if(body is BaseCharacter):
 		body.getDamage()

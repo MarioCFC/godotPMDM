@@ -24,6 +24,5 @@ func animation():
 	
 
 func getDamage():
-#	push_error("Desarrolla el motodo 'animation'")
-#	assert(false)
-	pass
+	push_error("Desarrolla el motodo 'animation'")
+	assert(false)
